@@ -2,19 +2,22 @@ package com.company;
 
 public class InterCommunicationThread
 {
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Chat m = new Chat();
-        String[] s1={ "Hi", "How are you ?", "I am also doing fine!" };
-        new T1(m,s1);
-        String[] s2={ "Hi", "I am good, what about you?", "Great!" };
-        new T2(m,s2);
+        String[] s1 = {"Hi", "How are you ?", "I am also doing fine!"};
+        new T1(m, s1);
+        String[] s2 = {"Hi", "I am good, what about you?", "Great!"};
+        new T2(m, s2);
     }
 }
 
-class Chat {
+class Chat
+{
     boolean flag = false;
 
-    public synchronized void Question(String msg) {
+    public synchronized void Question(String msg)
+    {
         if (flag) {
             try {
                 wait();
@@ -27,7 +30,8 @@ class Chat {
         notify();
     }
 
-    public synchronized void Answer(String msg) {
+    public synchronized void Answer(String msg)
+    {
         if (!flag) {
             try {
                 wait();
@@ -42,34 +46,40 @@ class Chat {
     }
 }
 
-class T1 implements Runnable {
+class T1 implements Runnable
+{
     Chat m;
     String[] s1;
 
-    public T1(Chat m1,String[] s1) {
+    public T1(Chat m1, String[] s1)
+    {
         this.m = m1;
-        this.s1=s1;
+        this.s1 = s1;
         new Thread(this, "Question").start();
     }
 
-    public void run() {
+    public void run()
+    {
         for (int i = 0; i < s1.length; i++) {
             m.Question(s1[i]);
         }
     }
 }
 
-class T2 implements Runnable {
+class T2 implements Runnable
+{
     Chat m;
     String[] s2;
 
-    public T2(Chat m2,String[] s2) {
+    public T2(Chat m2, String[] s2)
+    {
         this.m = m2;
-        this.s2=s2;
+        this.s2 = s2;
         new Thread(this, "Answer").start();
     }
 
-    public void run() {
+    public void run()
+    {
         for (int i = 0; i < s2.length; i++) {
             m.Answer(s2[i]);
         }

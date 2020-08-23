@@ -1,6 +1,7 @@
 package com.company;
 
-public class Haversine {
+public class Haversine
+{
 
     static double haversine(double lat1, double lon1,
                             double lat2, double lon2)
